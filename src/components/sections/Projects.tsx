@@ -21,7 +21,7 @@ export default function Projects() {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold break-fix">Projects</h2>
+          <h2 className="text-4xl md:text-5xl font-bold break-fix leading-tight">Projects</h2>
           <p className="text-[#9ca3af] mt-3">Selected production and research projects.</p>
         </motion.div>
 

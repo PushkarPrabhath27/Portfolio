@@ -65,7 +65,7 @@ export default function Contact() {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold break-fix">Contact</h2>
+          <h2 className="text-4xl md:text-5xl font-bold break-fix leading-tight">Contact</h2>
           <p className="text-[#9ca3af] mt-3 break-fix">
             Let&apos;s discuss projects, research, or full-time opportunities.
           </p>

@@ -15,7 +15,7 @@ export default function Skills() {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold break-fix">Skills</h2>
+          <h2 className="text-4xl md:text-5xl font-bold break-fix leading-tight">Skills</h2>
           <p className="text-[#9ca3af] mt-3">Core tools and technologies I use in production.</p>
         </motion.div>
 

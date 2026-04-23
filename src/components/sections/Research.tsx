@@ -16,7 +16,7 @@ export default function Research() {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold break-fix">Research</h2>
+          <h2 className="text-4xl md:text-5xl font-bold break-fix leading-tight">Research</h2>
           <p className="text-[#9ca3af] mt-3">Publications and ongoing research efforts.</p>
         </motion.div>
 
