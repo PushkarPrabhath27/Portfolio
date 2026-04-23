@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/layout/Container";
 import { projects, getFeaturedProjects } from "@/lib/data/projects";
@@ -136,8 +137,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             {project.longDescription}
           </p>
 
-          <motion.a
-            href={`/projects/${project.slug}`}
+          <motion.div
             className={`
               inline-flex items-center gap-2 font-bold uppercase tracking-wider text-sm
               transition-all duration-100
@@ -146,9 +146,11 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             whileHover={{ x: [0, 5, 0] }}
             transition={{ duration: 0.3, repeat: Infinity }}
           >
-            <span>VIEW DETAILS</span>
-            <ChevronRight className="w-5 h-5" />
-          </motion.a>
+            <Link href={`/projects/${project.slug}`} className="inline-flex items-center gap-2">
+              <span>VIEW DETAILS</span>
+              <ChevronRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
 
         <div
