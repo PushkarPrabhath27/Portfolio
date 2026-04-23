@@ -49,7 +49,9 @@ export default function Contact() {
     }
 
     const subject = encodeURIComponent(`Portfolio Contact: ${name.trim()}`);
-    const body = encodeURIComponent(`Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}`);
+    const body = encodeURIComponent(
+      `Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}`
+    );
     window.location.href = `mailto:pushkar.prabhath@gmail.com?subject=${subject}&body=${body}`;
   };
 
@@ -64,7 +66,9 @@ export default function Contact() {
           className="mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold break-fix">Contact</h2>
-          <p className="text-[#9ca3af] mt-3 break-fix">Let&apos;s discuss projects, research, or full-time opportunities.</p>
+          <p className="text-[#9ca3af] mt-3 break-fix">
+            Let&apos;s discuss projects, research, or full-time opportunities.
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
