@@ -41,7 +41,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <div className="w-10 h-10 flex items-center justify-center">
-        <div className="w-4 h-4 rounded-full bg-[var(--background-tertiary)]" />
+        <div className="w-4 h-4 rounded-full bg-[var(card)]" />
       </div>
     );
   }
@@ -56,9 +56,9 @@ export function ThemeToggle() {
     >
       <div className="relative w-4 h-4">
         {theme === "dark" ? (
-          <Sun className="h-4 w-4 transition-all duration-300 hover:rotate-180" />
+          <Sun className="h-4 w-4 transition-all duration-300 hover:scale-105" />
         ) : (
-          <Moon className="h-4 w-4 transition-all duration-300 hover:rotate-12" />
+          <Moon className="h-4 w-4 transition-all duration-300 hover:scale-105" />
         )}
       </div>
     </Button>
