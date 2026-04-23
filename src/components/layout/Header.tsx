@@ -56,14 +56,13 @@ export default function Header() {
             ))}
           </div>
 
-          <motion.a
-            href="/contact"
+          <motion.div
             className="hidden md:block px-6 py-2 border-4 border-[#ff2d75] text-[#ff2d75] font-black uppercase text-sm tracking-wider hover:bg-[#ff2d75] hover:text-black transition-all duration-100"
             whileHover={{ scale: 1.05, rotate: [-1, 1, 0] }}
             whileTap={{ scale: 0.95 }}
           >
-            LET&apos;S TALK
-          </motion.a>
+            <Link href="/contact">LET&apos;S TALK</Link>
+          </motion.div>
 
           <motion.button
             className="md:hidden p-2 text-white border-2 border-white"
@@ -118,15 +117,16 @@ export default function Header() {
                     </Link>
                   </motion.div>
                 ))}
-                <motion.a
-                  href="/contact"
+                <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5 }}
                   className="mt-4 px-6 py-3 border-4 border-[#ff2d75] text-[#ff2d75] font-black uppercase text-center"
                 >
-                  LET&apos;S TALK
-                </motion.a>
+                  <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
+                    LET&apos;S TALK
+                  </Link>
+                </motion.div>
               </div>
             </Container>
           </motion.div>

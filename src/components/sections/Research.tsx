@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { researchPapers } from "@/lib/data/research";
 
@@ -89,14 +90,15 @@ export default function Research() {
                         {paper.title}
                       </h3>
                     </div>
-                    <motion.a
-                      href={`/research/${paper.slug}`}
+                    <motion.div
                       className="comic-button whitespace-nowrap"
                       whileHover={{ rotate: [-3, 3, 0], scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <span className="relative z-10">READ MORE</span>
-                    </motion.a>
+                      <Link href={`/research/${paper.slug}`}>
+                        <span className="relative z-10">READ MORE</span>
+                      </Link>
+                    </motion.div>
                   </div>
 
                   <p className="text-white/70 mb-6 leading-relaxed line-clamp-3">

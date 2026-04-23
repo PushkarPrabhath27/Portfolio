@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { Mail, Github, Linkedin, MapPin } from "lucide-react";
@@ -39,6 +39,23 @@ const contactMethods = [
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      return;
+    }
+
+    const subject = encodeURIComponent(`Portfolio Contact: ${name.trim()}`);
+    const body = encodeURIComponent(
+      `Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}`
+    );
+
+    window.location.href = `mailto:pushkar.prabhath@gmail.com?subject=${subject}&body=${body}`;
+  };
 
   return (
     <section
@@ -94,7 +111,7 @@ export default function Contact() {
                 SEND A MESSAGE
               </h3>
 
-              <form className="space-y-6 relative z-10">
+              <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
                 <div>
                   <label className="block text-xs font-black uppercase tracking-[0.3em] text-white/60 mb-2">
                     Name
@@ -103,6 +120,9 @@ export default function Contact() {
                     type="text"
                     className="sp-input w-full"
                     placeholder="YOUR NAME"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    required
                   />
                 </div>
                 <div>
@@ -113,6 +133,9 @@ export default function Contact() {
                     type="email"
                     className="sp-input w-full"
                     placeholder="YOUR@EMAIL.COM"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    required
                   />
                 </div>
                 <div>
@@ -123,6 +146,9 @@ export default function Contact() {
                     rows={5}
                     className="sp-input w-full resize-none"
                     placeholder="YOUR MESSAGE..."
+                    value={message}
+                    onChange={(event) => setMessage(event.target.value)}
+                    required
                   />
                 </div>
                 <motion.button
@@ -171,8 +197,8 @@ export default function Contact() {
                       {method.href ? (
                         <a
                           href={method.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          target={method.href.startsWith("mailto:") ? undefined : "_blank"}
+                          rel={method.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
                           className="text-lg font-black text-white group-hover:text-current transition-colors duration-100"
                           style={{ color: method.color }}
                         >
