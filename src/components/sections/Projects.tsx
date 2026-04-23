@@ -38,7 +38,7 @@ export default function Projects() {
                 e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
                 e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
               }}
-              className="card-spotlight bg-[#111] border border-neutral-800 border-l-2 border-l-[#ff2d75] rounded-xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+              className="card-spotlight bg-[#111] border border-neutral-800 border-l-2 border-l-[#ff2d75] rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
             >
               <h3 className="text-2xl font-bold break-fix">{project.title}</h3>
               <p className="text-[#9ca3af] mt-3 break-fix">{project.shortDescription}</p>
