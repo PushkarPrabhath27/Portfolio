@@ -39,7 +39,7 @@ export default function Research() {
 
               <p className="text-[#9ca3af] mt-3 break-fix">{paper.abstract}</p>
 
-              <Link href={`/research/${paper.slug}`} className="inline-block mt-6 text-sm text-[#00f0ff] hover:text-white">
+              <Link href={`/research/${paper.slug}`} className="text-[#00f0ff] mt-4 inline-block">
                 Read paper →
               </Link>
             </motion.div>

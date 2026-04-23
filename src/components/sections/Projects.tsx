@@ -51,7 +51,10 @@ export default function Projects() {
                 ))}
               </div>
 
-              <Link href={`/projects/${project.slug}`} className="inline-block mt-6 text-sm text-[#ff2d75] hover:text-white break-fix">
+              <Link
+                href={`/projects/${project.slug}`}
+                className="inline-block mt-6 text-sm text-[#ff2d75] hover:text-white break-fix"
+              >
                 View details →
               </Link>
             </motion.div>

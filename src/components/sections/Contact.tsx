@@ -88,7 +88,7 @@ export default function Contact() {
                   value={name}
                   onChange={(event) => setName(event.target.value)}
                   required
-                  className="w-full rounded-lg border border-neutral-700 bg-black px-4 py-3 text-white focus:border-[#00f0ff] outline-none"
+                  className="w-full border border-neutral-700 bg-black px-4 py-3 text-white focus:border-[#00f0ff] outline-none"
                 />
               </div>
               <div>
@@ -98,7 +98,7 @@ export default function Contact() {
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   required
-                  className="w-full rounded-lg border border-neutral-700 bg-black px-4 py-3 text-white focus:border-[#00f0ff] outline-none"
+                  className="w-full border border-neutral-700 bg-black px-4 py-3 text-white focus:border-[#00f0ff] outline-none"
                 />
               </div>
               <div>
@@ -108,7 +108,7 @@ export default function Contact() {
                   value={message}
                   onChange={(event) => setMessage(event.target.value)}
                   required
-                  className="w-full rounded-lg border border-neutral-700 bg-black px-4 py-3 text-white resize-none focus:border-[#00f0ff] outline-none"
+                  className="w-full border border-neutral-700 bg-black px-4 py-3 text-white resize-none focus:border-[#00f0ff] outline-none"
                 />
               </div>
               <button
