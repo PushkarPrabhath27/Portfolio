@@ -9,21 +9,21 @@ const contactMethods = [
     label: "Email",
     value: "pushkarprabhathrayana@gmail.com",
     href: "mailto:pushkarprabhathrayana@gmail.com",
-    color: "text-blue-400",
+    accent: "#00f0ff",
   },
   {
     icon: Github,
     label: "GitHub",
     value: "github.com/PushkarPrabhath27",
     href: "https://github.com/PushkarPrabhath27",
-    color: "text-white",
+    accent: "#00f0ff",
   },
   {
     icon: Linkedin,
     label: "LinkedIn",
     value: "linkedin.com/in/pushkar-prabhath",
     href: "https://linkedin.com/in/pushkar-prabhath",
-    color: "text-blue-500",
+    accent: "#00f0ff",
   },
 ];
 
@@ -55,13 +55,13 @@ export default function ContactPage() {
                   href={method.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block p-6 rounded-xl bg-[var(--background-secondary)] border border-[var(--border)] hover:border-[var(--accent-primary)]/30 transition-all"
+                  className="group block p-6 rounded-xl bg-[#111] border border-neutral-800 border-l-2 border-l-[#00f0ff] transition-all hover:-translate-y-1"
                 >
-                  <method.icon className={`h-6 w-6 mb-3 ${method.color}`} />
-                  <h4 className="font-medium text-[var(--text-primary)] mb-1">
+                  <method.icon className="h-6 w-6 mb-3" style={{ color: method.accent }} />
+                  <h4 className="font-medium text-white mb-1">
                     {method.label}
                   </h4>
-                  <p className="text-sm text-[var(--text-secondary)] break-all">
+                  <p className="text-sm text-[#9ca3af] break-all">
                     {method.value}
                   </p>
                 </a>
