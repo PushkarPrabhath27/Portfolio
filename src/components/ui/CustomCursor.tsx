@@ -4,100 +4,50 @@ import { useEffect, useRef } from "react";
 
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const dotRef = useRef<HTMLDivElement>(null);
-  const trailRef = useRef<HTMLDivElement>(null);
-  const positionRef = useRef({ x: 0, y: 0 });
-  const trailPositionRef = useRef({ x: 0, y: 0 });
-  const rafRef = useRef<number | null>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cursor = cursorRef.current;
-    const dot = dotRef.current;
-    const trail = trailRef.current;
+    const spotlight = spotlightRef.current;
+    if (!cursor || !spotlight) return;
 
-    if (!cursor || !dot || !trail) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      positionRef.current = { x: e.clientX, y: e.clientY };
-      
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
-      
-      dot.style.left = `${e.clientX}px`;
-      dot.style.top = `${e.clientY}px`;
+    const move = (event: MouseEvent) => {
+      const { clientX, clientY } = event;
+      cursor.style.left = `${clientX}px`;
+      cursor.style.top = `${clientY}px`;
+      spotlight.style.left = `${clientX}px`;
+      spotlight.style.top = `${clientY}px`;
     };
 
-    const animateTrail = () => {
-      trailPositionRef.current.x += (positionRef.current.x - trailPositionRef.current.x) * 0.1;
-      trailPositionRef.current.y += (positionRef.current.y - trailPositionRef.current.y) * 0.1;
-      
-      trail.style.left = `${trailPositionRef.current.x}px`;
-      trail.style.top = `${trailPositionRef.current.y}px`;
-      
-      rafRef.current = requestAnimationFrame(animateTrail);
+    const grow = () => {
+      cursor.style.transform = "translate(-50%, -50%) scale(1.8)";
     };
 
-    const handleMouseEnter = () => {
-      cursor.style.transform = "translate(-50%, -50%) scale(1.5)";
-      cursor.style.borderColor = "#ff2d92";
-    };
-
-    const handleMouseLeave = () => {
-      cursor.style.transform = "translate(-50%, -50%) scale(1)";
-      cursor.style.borderColor = "#00f0ff";
-    };
-
-    const handleMouseDown = () => {
-      cursor.style.transform = "translate(-50%, -50%) scale(0.8)";
-    };
-
-    const handleMouseUp = () => {
+    const reset = () => {
       cursor.style.transform = "translate(-50%, -50%) scale(1)";
     };
 
-    const addHoverListeners = () => {
-      const interactiveElements = document.querySelectorAll("a, button, [role='button']");
-      interactiveElements.forEach((el) => {
-        el.addEventListener("mouseenter", handleMouseEnter);
-        el.addEventListener("mouseleave", handleMouseLeave);
-      });
-    };
+    const interactive = document.querySelectorAll("a, button, input, textarea");
+    interactive.forEach((node) => {
+      node.addEventListener("mouseenter", grow);
+      node.addEventListener("mouseleave", reset);
+    });
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-    
-    animateTrail();
-    addHoverListeners();
-
-    const observer = new MutationObserver(addHoverListeners);
-    observer.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener("mousemove", move);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mouseup", handleMouseUp);
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-      observer.disconnect();
+      interactive.forEach((node) => {
+        node.removeEventListener("mouseenter", grow);
+        node.removeEventListener("mouseleave", reset);
+      });
+      window.removeEventListener("mousemove", move);
     };
   }, []);
 
   return (
     <>
-      <div
-        ref={cursorRef}
-        className="custom-cursor"
-      />
-      <div
-        ref={dotRef}
-        className="cursor-dot"
-      />
-      <div
-        ref={trailRef}
-        className="cursor-trail"
-      />
+      <div ref={cursorRef} className="custom-cursor hidden md:block" />
+      <div ref={spotlightRef} className="cursor-spotlight hidden md:block" />
     </>
   );
 }
