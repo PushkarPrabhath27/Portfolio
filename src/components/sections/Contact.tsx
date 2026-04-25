@@ -1,18 +1,24 @@
 "use client";
 
-import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
-import { Mail, Github, Linkedin, MapPin } from "lucide-react";
+import {
+  Mail,
+  Github,
+  Linkedin,
+  FileText,
+} from "lucide-react";
 import { SectionIntro } from "@/components/ui/SectionIntro";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { StaggerGrid } from "@/components/ui/StaggerGrid";
 
-const contactMethods = [
+const contactActions = [
   {
     icon: Mail,
-    label: "Email",
+    label: "Email Me",
     value: "pushkar.prabhath@gmail.com",
     href: "mailto:pushkar.prabhath@gmail.com",
-    accent: "#00eaff",
+    accent: "#ff2d75",
   },
   {
     icon: Github,
@@ -26,38 +32,18 @@ const contactMethods = [
     label: "LinkedIn",
     value: "Pushkar Prabhath",
     href: "https://linkedin.com/in/pushkar-prabhath",
-    accent: "#00eaff",
+    accent: "#8b5cf6",
   },
   {
-    icon: MapPin,
-    label: "Location",
-    value: "Hyderabad, India",
-    href: null,
-    accent: "#00eaff",
+    icon: FileText,
+    label: "Resume",
+    value: "Download CV",
+    href: "/resume.pdf",
+    accent: "#ffffff",
   },
 ];
 
 export default function Contact() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!name.trim() || !email.trim() || !message.trim()) return;
-
-    const subject = encodeURIComponent(
-      `Portfolio Contact: ${name.trim()}`
-    );
-
-    const body = encodeURIComponent(
-      `Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}`
-    );
-
-    window.location.href = `mailto:pushkar.prabhath@gmail.com?subject=${subject}&body=${body}`;
-  };
-
   return (
     <section
       id="contact"
@@ -65,169 +51,81 @@ export default function Contact() {
     >
       <Container>
         <SectionIntro
-          title="Contact"
-          subtitle="Let’s discuss projects, research, or full-time opportunities."
-          sticker="built with intent"
+          title="LET’S BUILD SOMETHING SERIOUS."
+          subtitle="Open to internships, research, product engineering, and AI opportunities."
+          sticker="contact cta"
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 50, rotate: 1.2 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-            transition={{
-              duration: 0.75,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            viewport={{ once: true, amount: 0.25 }}
-            className="panel-corners card-spotlight bg-[#111111]/90 border border-neutral-800 border-l-2 border-l-[#00eaff] rounded-xl p-8"
-          >
-            <h3 className="text-2xl font-bold mb-8 break-fix">
-              Send a message
-            </h3>
+        <motion.p
+          initial={{
+            opacity: 0,
+            y: 24,
+            filter: "blur(8px)",
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+          }}
+          transition={{
+            duration: 0.7,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          viewport={{ once: true }}
+          className="max-w-3xl text-[#9ca3af] text-lg leading-relaxed mb-10 break-fix"
+        >
+          If you are building ambitious products, AI systems, or
+          high-impact research workflows, let&apos;s connect.
+        </motion.p>
 
-            <form
-              className="space-y-5"
-              onSubmit={handleSubmit}
+        <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {contactActions.map((action, index) => (
+            <SpotlightCard
+              key={action.label}
+              delay={index * 0.08}
+              className="group bg-[#111111]/90 border border-neutral-800 rounded-2xl p-6 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(0,0,0,0.45)]"
             >
-              <div>
-                <label className="block text-sm text-[#9ca3af] mb-2 uppercase tracking-wider">
-                  Name
-                </label>
-
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(event) =>
-                    setName(event.target.value)
-                  }
-                  required
-                  placeholder="Your Name"
-                  className="w-full border border-neutral-700 bg-black px-4 py-3 text-white rounded-lg outline-none transition-all duration-300 focus:border-[#00eaff] focus:shadow-[0_0_0_1px_rgba(0,234,255,0.4)]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-[#9ca3af] mb-2 uppercase tracking-wider">
-                  Email
-                </label>
-
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(event) =>
-                    setEmail(event.target.value)
-                  }
-                  required
-                  placeholder="your@email.com"
-                  className="w-full border border-neutral-700 bg-black px-4 py-3 text-white rounded-lg outline-none transition-all duration-300 focus:border-[#00eaff] focus:shadow-[0_0_0_1px_rgba(0,234,255,0.4)]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-[#9ca3af] mb-2 uppercase tracking-wider">
-                  Message
-                </label>
-
-                <textarea
-                  rows={6}
-                  value={message}
-                  onChange={(event) =>
-                    setMessage(event.target.value)
-                  }
-                  required
-                  placeholder="Tell me about your project..."
-                  className="w-full border border-neutral-700 bg-black px-4 py-3 text-white rounded-lg resize-none outline-none transition-all duration-300 focus:border-[#00eaff] focus:shadow-[0_0_0_1px_rgba(0,234,255,0.4)]"
-                />
-              </div>
-
-              <motion.button
-                type="submit"
-                whileHover={{
-                  scale: 1.03,
-                  y: -2,
-                }}
-                whileTap={{
-                  scale: 0.98,
-                }}
-                className="px-7 py-3 border border-[#00eaff] text-[#00eaff] rounded-lg hover:bg-[#00eaff] hover:text-black transition-all duration-300 shine-button"
+              <a
+                href={action.href}
+                target={
+                  action.href.startsWith("mailto:") ||
+                  action.href.startsWith("/")
+                    ? undefined
+                    : "_blank"
+                }
+                rel={
+                  action.href.startsWith("mailto:") ||
+                  action.href.startsWith("/")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+                className="flex items-center justify-between gap-4"
               >
-                Send Message
-              </motion.button>
-            </form>
-          </motion.div>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.22em] text-[#9ca3af]">
+                    {action.label}
+                  </p>
 
-          {/* Contact Cards */}
-          <div className="grid grid-cols-1 gap-4">
-            {contactMethods.map((method, idx) => (
-              <motion.div
-                key={method.label}
-                initial={{
-                  opacity: 0,
-                  x: 45,
-                  filter: "blur(8px)",
-                }}
-                whileInView={{
-                  opacity: 1,
-                  x: 0,
-                  filter: "blur(0px)",
-                }}
-                transition={{
-                  duration: 0.65,
-                  delay: idx * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                viewport={{ once: true, amount: 0.2 }}
-                className="panel-corners card-spotlight bg-[#111111]/90 border border-neutral-800 border-l-2 border-l-[#00eaff] rounded-xl p-6"
-              >
-                <div className="flex items-center gap-4">
-                  <method.icon
-                    className="w-5 h-5 shrink-0"
+                  <p
+                    className="text-xl md:text-2xl font-bold break-fix mt-2 transition-colors duration-300 group-hover:text-white"
                     style={{
-                      color: method.accent,
+                      color: action.accent,
                     }}
-                  />
-
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.22em] text-[#9ca3af] mb-1">
-                      {method.label}
-                    </p>
-
-                    {method.href ? (
-                      <a
-                        href={method.href}
-                        target={
-                          method.href.startsWith(
-                            "mailto:"
-                          )
-                            ? undefined
-                            : "_blank"
-                        }
-                        rel={
-                          method.href.startsWith(
-                            "mailto:"
-                          )
-                            ? undefined
-                            : "noopener noreferrer"
-                        }
-                        className="font-medium hover:text-white break-fix transition-colors"
-                        style={{
-                          color: method.accent,
-                        }}
-                      >
-                        {method.value}
-                      </a>
-                    ) : (
-                      <p className="font-medium text-white break-fix">
-                        {method.value}
-                      </p>
-                    )}
-                  </div>
+                  >
+                    {action.value}
+                  </p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+
+                <action.icon
+                  className="h-6 w-6 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1"
+                  style={{
+                    color: action.accent,
+                  }}
+                />
+              </a>
+            </SpotlightCard>
+          ))}
+        </StaggerGrid>
       </Container>
     </section>
   );

@@ -11,7 +11,7 @@ export function CustomCursor() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  /* Fast dot */
+  /* Main fast dot */
   const fx = useSpring(x, {
     damping: 28,
     stiffness: 260,
@@ -24,7 +24,7 @@ export function CustomCursor() {
     mass: 0.5,
   });
 
-  /* Slower follower */
+  /* Smooth lag follower */
   const sx = useSpring(x, {
     damping: 40,
     stiffness: 120,
@@ -49,11 +49,17 @@ export function CustomCursor() {
       y.set(event.clientY);
     };
 
-    const onEnter = () => setHovering(true);
-    const onLeave = () => setHovering(false);
+    const onEnter = () =>
+      setHovering(true);
 
-    const onDown = () => setPressed(true);
-    const onUp = () => setPressed(false);
+    const onLeave = () =>
+      setHovering(false);
+
+    const onDown = () =>
+      setPressed(true);
+
+    const onUp = () =>
+      setPressed(false);
 
     const selectors =
       "a, button, input, textarea, .card-spotlight, [data-cursor='hover']";
@@ -92,10 +98,12 @@ export function CustomCursor() {
       "mousemove",
       move
     );
+
     window.addEventListener(
       "mousedown",
       onDown
     );
+
     window.addEventListener(
       "mouseup",
       onUp
@@ -121,10 +129,12 @@ export function CustomCursor() {
         "mousemove",
         move
       );
+
       window.removeEventListener(
         "mousedown",
         onDown
       );
+
       window.removeEventListener(
         "mouseup",
         onUp
@@ -150,7 +160,7 @@ export function CustomCursor() {
         }}
       />
 
-      {/* Ring Follower */}
+      {/* Ring */}
       <motion.div
         className="cursor-follower hidden md:block"
         style={{
@@ -159,11 +169,11 @@ export function CustomCursor() {
           scale: pressed
             ? 0.9
             : hovering
-            ? 1.75
+            ? 1.7
             : 1,
           opacity: hovering
             ? 0.95
-            : 0.65,
+            : 0.7,
         }}
       />
 
@@ -174,11 +184,11 @@ export function CustomCursor() {
           x: sx,
           y: sy,
           scale: hovering
-            ? 1.25
+            ? 1.2
             : 1,
           opacity: hovering
             ? 0.95
-            : 0.72,
+            : 0.8,
         }}
       />
     </>

@@ -11,7 +11,7 @@
   --border: #262626;
 
   --accent-primary: #ff2d75;
-  --accent-info: #00f0ff;
+  --accent-info: #00eaff;
   --accent-warning: #ffd500;
 }
 
@@ -26,7 +26,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Better controlled transitions */
 * {
   box-sizing: border-box;
   transition:
@@ -38,7 +37,6 @@ body {
     box-shadow 0.25s ease;
 }
 
-/* Fix long text overflow */
 .break-fix {
   word-break: break-word;
   overflow-wrap: anywhere;
@@ -83,7 +81,7 @@ body {
   background:
     radial-gradient(
       circle at 50% 30%,
-      rgba(0, 240, 255, 0.10),
+      rgba(0, 234, 255, 0.10),
       transparent 60%
     );
 }

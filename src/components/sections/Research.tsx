@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
-import { SectionIntro } from "@/components/ui/SectionIntro";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { researchPapers } from "@/lib/data/research";
 
 export default function Research() {
@@ -13,20 +13,20 @@ export default function Research() {
       className="relative section-spotlight-cyan subtle-noise py-24 overflow-hidden"
     >
       <Container>
-        <SectionIntro
-          title="Research"
-          subtitle="Publications and ongoing research efforts."
-          sticker="built with intent"
+        <SectionHeading
+          title="Research Highlights"
+          subtitle="Editorial snapshots of active and published work across AI systems and language research."
+          sticker="research"
         />
 
-        <div className="grid grid-cols-1 gap-8">
+        <div className="space-y-6">
           {researchPapers.map((paper, idx) => (
-            <motion.div
+            <motion.article
               key={paper.slug}
               initial={{
                 opacity: 0,
-                x: idx % 2 === 0 ? -50 : 50,
-                y: 30,
+                x: idx % 2 ? 60 : -60,
+                y: 24,
                 filter: "blur(8px)",
               }}
               whileInView={{
@@ -40,51 +40,58 @@ export default function Research() {
                 delay: idx * 0.08,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              viewport={{ once: true, amount: 0.2 }}
-              className="group panel-corners card-spotlight bg-[#111111]/90 border border-neutral-800 border-l-2 border-l-[#00eaff] rounded-xl p-7 hover:-translate-y-1 hover:shadow-[0_22px_45px_rgba(0,0,0,0.45)]"
+              viewport={{
+                once: true,
+                amount: 0.2,
+              }}
+              className="group panel-corners card-spotlight grid md:grid-cols-[1fr_auto] gap-6 bg-[#111111]/90 border border-neutral-800 rounded-2xl p-6 hover:-translate-y-1 hover:shadow-[0_22px_45px_rgba(0,0,0,0.45)]"
             >
-              {/* Top Row */}
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <h3 className="text-2xl md:text-3xl font-bold break-fix leading-tight max-w-3xl">
+              {/* Left Content */}
+              <div>
+                <h3 className="text-2xl md:text-3xl font-black break-fix leading-tight">
                   {paper.title}
                 </h3>
 
+                <div className="mt-4 h-px w-full bg-neutral-800" />
+
+                <p className="text-[#9ca3af] mt-4 break-fix leading-relaxed">
+                  {paper.abstract}
+                </p>
+              </div>
+
+              {/* Right Meta */}
+              <div className="flex md:flex-col items-start gap-3 md:min-w-[160px]">
                 <motion.span
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
+                  initial={{
+                    scale: 0.85,
+                    opacity: 0,
+                  }}
+                  whileInView={{
+                    scale: 1,
+                    opacity: 1,
+                  }}
                   transition={{
-                    delay: 0.18 + idx * 0.08,
-                    duration: 0.4,
+                    delay: 0.2 + idx * 0.08,
+                    duration: 0.35,
                   }}
                   viewport={{ once: true }}
-                  className="shrink-0 text-xs px-3 py-1 border border-[#00eaff] text-[#00eaff] uppercase tracking-wider rounded-full"
+                  className="text-xs px-3 py-1 border border-[#00eaff] text-[#00eaff] uppercase tracking-[0.18em] rounded-full"
                 >
                   {paper.status.replace("-", " ")}
                 </motion.span>
-              </div>
 
-              {/* Divider */}
-              <div className="mt-4 h-px w-full bg-neutral-800" />
-
-              {/* Abstract */}
-              <p className="text-[#9ca3af] mt-5 break-fix leading-relaxed">
-                {paper.abstract}
-              </p>
-
-              {/* CTA */}
-              <Link
-                href={`/research/${paper.slug}`}
-                className="inline-flex items-center gap-2 mt-6 text-[#00eaff] hover:text-white transition-colors duration-300"
-              >
-                Read paper
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:translate-x-1"
+                <Link
+                  href={`/research/${paper.slug}`}
+                  className="inline-flex items-center gap-2 text-[#00eaff] hover:text-white transition-colors duration-300"
                 >
-                  →
-                </span>
-              </Link>
-            </motion.div>
+                  Read paper
+
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
+              </div>
+            </motion.article>
           ))}
         </div>
       </Container>
